@@ -25,7 +25,7 @@ const data = ref<any>([])
 onMounted(() => {
   request('/newsong', {
     method: 'POST'
-  }).then((res) => {
+  }).then((res: any) => {
     data.value = res.result
     // console.log('request:', res)
   })
