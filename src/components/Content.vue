@@ -8,7 +8,7 @@
           <Songs></Songs>
         </div>
       </van-tab>
-      <van-tab title="热歌榜">热歌榜</van-tab>
+      <van-tab title="热歌榜"><HotSong></HotSong></van-tab>
       <van-tab title="搜索">搜索</van-tab>
     </van-tabs>
   </div>
@@ -19,6 +19,7 @@ import { Tab, Tabs } from 'vant'
 import { defineComponent } from 'vue'
 import Playlist from '@/components/recommend/Playlist.vue'
 import Songs from '@/components/recommend/Songs.vue'
+import HotSong from '@/components/toplist/HotSong.vue'
 
 export default defineComponent({
   components: {
@@ -29,7 +30,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      active: 0
+      active: 1
     }
   }
 })
