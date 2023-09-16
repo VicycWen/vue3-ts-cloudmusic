@@ -5,6 +5,7 @@
         >
         <div class="m-homeremd">
           <Playlist></Playlist>
+          <Songs></Songs>
         </div>
       </van-tab>
       <van-tab title="热歌榜">热歌榜</van-tab>
@@ -17,11 +18,14 @@
 import { Tab, Tabs } from 'vant'
 import { defineComponent } from 'vue'
 import Playlist from '@/components/recommend/Playlist.vue'
+import Songs from '@/components/recommend/Songs.vue'
 
 export default defineComponent({
   components: {
     [Tab.name]: Tab,
-    [Tabs.name]: Tabs
+    [Tabs.name]: Tabs,
+    Playlist: Playlist,
+    Songs: Songs
   },
   setup() {
     return {
