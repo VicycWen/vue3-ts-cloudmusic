@@ -1,7 +1,7 @@
-// import Mock from 'mockjs'
-import newSong from './data/newSong'
+
 import { Mock,mockFetch } from 'mockjs-fetch';
-// mockFetch(Mock);
+import newSong from './data/newSong'
+import hotSong from './data/hotSong';
 
 // mock的配置
 Mock.setup({
@@ -13,3 +13,6 @@ Mock.setup({
 Mock.mock(/\/newsong/, () => {
   return newSong
 })
+Mock.mock(/\/playlist\/detail/, () => {
+    return hotSong
+  })
