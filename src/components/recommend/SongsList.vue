@@ -1,6 +1,6 @@
 <template>
   <h2 class="remd_tl">编辑推荐</h2>
-  <div class="remd_songs">
+  <div class="remd_songs" v-if="!isLoading">
     <div class="remd_ul" v-if="!apiAvailable.available">
       <RouterLink class="remd_li" to="/list?id=7692044224">
         <div class="remd_img">
@@ -61,6 +61,7 @@
       </RouterLink>
     </div>
   </div>
+  <van-loading v-else style="text-align: center;"/>
 </template>
 
 <script setup lang="ts">
@@ -72,10 +73,12 @@ import { useApiAvailable } from "@/stores/apiAvailable"
 
 const data = ref([])
 const apiAvailable = useApiAvailable()
+const isLoading = ref(true)
 onMounted(() => {
   // if(1) return;
   request('/personalized?limit=6', { method: 'GET' }).then((res: any) => {
     // console.log('personalized:', res)
+    isLoading.value = false
     if (res?.code == 200 && res?.result?.length) {
       apiAvailable.setApiAvailable(true);
       data.value = res.result

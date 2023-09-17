@@ -6,7 +6,8 @@
         <div class="hottime">更新日期：{{ date }}</div>
       </div>
     </div>
-    <SongList :data="data"></SongList>
+    <SongList v-if="!isLoading" :data="data"></SongList>
+    <van-loading v-else style="text-align: center;"/>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import { formaDate } from '@/utils/index'
 
 const data = ref<any>([])
 let date = ref<string>('')
+const isLoading = ref(true)
 const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {
   request(url, {
     method: 'POST'
@@ -32,7 +34,7 @@ const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {
     })
     .catch(() => {
       defaultUrl && fetchData(defaultUrl, '', false)
-    })
+    }).finally(()=>{isLoading.value = false})
 }
 onMounted(() => {
   const id = 3778678 // 热歌榜单
