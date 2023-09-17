@@ -74,7 +74,7 @@ const data = ref([])
 const apiAvailable = useApiAvailable()
 onMounted(() => {
   request('/personalized?limit=6', { method: 'GET' }).then((res: any) => {
-    console.log('personalized:', res)
+    // console.log('personalized:', res)
     if (res?.code == 200 && res?.result?.length) {
       apiAvailable.setApiAvailable(true);
       data.value = res.result

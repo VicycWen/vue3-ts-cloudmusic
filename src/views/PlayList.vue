@@ -29,20 +29,31 @@ import SongList from '@/components/common/SongList.vue'
 import request from '@/utils/request'
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router';
+
 const { query } = useRoute()
 // console.log('query:', query)
 const id = query.id
 
 const data = ref<any>([]);
 let description = []
-onMounted(() => {
-    request(`/playlist/detail?id=${id}`, {
+const fetchData = (url:string, defaultUrl:string, defaultMock = true) => {
+    request(url, {
         method: 'POST'
     }).then((res: any) => {
         data.value = res
         description = res?.playlist?.description?.split('\n');
         // console.log('request:', res?.playlist?.coverImgUrl)
+        if((res.code !== 200 || !res?.playlist?.tracks?.length) && defaultMock){
+            fetchData(defaultUrl, '', false)
+        }
+    }).catch(() => {
+      fetchData(defaultUrl, '', false)
     })
+}
+onMounted(() => {
+    const url = `/playlist/detail?id=${id}`;
+    const defaultUrl = `/mock/playlist/detail?id=${id}`;
+    fetchData(url, defaultUrl)   
 })
 </script>
 

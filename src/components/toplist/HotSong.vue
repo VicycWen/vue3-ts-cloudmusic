@@ -3,7 +3,7 @@
     <div class="hotop">
       <div class="hotopct">
         <div class="u-hmsprt hoticon"></div>
-        <div class="hottime">更新日期：09月16日</div>
+        <div class="hottime">更新日期：{{ date }}</div>
       </div>
     </div>
     <SongList :data="data"></SongList>
@@ -13,16 +13,32 @@
 <script setup lang="ts">
 import request from '@/utils/request'
 import { ref, onMounted } from 'vue'
-import SongList from '../common/SongList.vue';
+import SongList from '../common/SongList.vue'
+import { formaDate } from '@/utils/index'
 
 const data = ref<any>([])
-onMounted(() => {
-  request('/playlist/detail', {
+let date = ref<string>('')
+const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {
+  request(url, {
     method: 'POST'
-  }).then((res: any) => {
-    data.value = res.playlist.tracks
-    // console.log('request:', res.playlist.tracks)
   })
+    .then((res: any) => {
+      data.value = res?.playlist?.tracks
+      date.value = formaDate(res?.playlist?.updateTime)
+      // console.log('request:', res?.playlist?.coverImgUrl)
+      if ((res.code !== 200 || !res?.playlist?.tracks?.length) && defaultMock) {
+        fetchData(defaultUrl, '', false)
+      }
+    })
+    .catch(() => {
+      fetchData(defaultUrl, '', false)
+    })
+}
+onMounted(() => {
+  const id = 3778678 // 热歌榜单
+  const url = `/playlist/detail?id=${id}`
+  const defaultUrl = `/mock/playlist/detail?id=${id}`
+  fetchData(url, defaultUrl)
 })
 </script>
 

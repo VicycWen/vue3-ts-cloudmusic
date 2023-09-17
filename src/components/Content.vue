@@ -9,7 +9,7 @@
         </div>
       </van-tab>
       <van-tab title="热歌榜"><HotSong></HotSong></van-tab>
-      <van-tab title="搜索">搜索</van-tab>
+      <!-- <van-tab title="搜索">搜索</van-tab> -->
     </van-tabs>
   </div>
 </template>

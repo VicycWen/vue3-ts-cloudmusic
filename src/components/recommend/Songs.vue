@@ -46,12 +46,14 @@ onMounted(() => {
     method: 'GET'
   }).then((res: any) => {
     data.value = res.data
-    console.log('/top/song:', res)
+    // console.log('/top/song:', res)
   })
   }
 })
+let firstGetNewsong = true
 onUpdated(() => {
-  if(data.value && data.value.length === 0){
+  if(data.value && data.value.length === 0 && firstGetNewsong){
+    firstGetNewsong = false
     request('/newsong', {
     method: 'POST'
   }).then((res: any) => {

@@ -13,7 +13,7 @@ Mock.setup({
 Mock.mock(/\/newsong/, () => {
   return newSong
 })
-Mock.mock(/\/playlist\/detail/, ({params,url,...rest}) => {
+Mock.mock(/\/mock\/playlist\/detail/, ({params,url,...rest}) => {
   let id;
   url.split('?')?.[1]?.split('&')?.map(item => {
     const [key, value] = item.split('=')
