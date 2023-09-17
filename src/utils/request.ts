@@ -1,4 +1,4 @@
-// const base_url = 'http://localhost:3000/api'
+const base_url = 'https://service-flgzov7m-1259174451.gz.apigw.tencentcs.com'
 interface fetchOptions {
     timeout?: number,
     method?: string,
@@ -21,7 +21,7 @@ export default function request(url: string, options: fetchOptions) {
         const timer = setTimeout(() => {
             reject(new Error('fetch timeout'))
         }, timeout)
-        fetch(url, rest)
+        fetch(base_url + url, rest)
             .then(res => {
                 clearTimeout(timer)
                 resolve(res.json())

@@ -2,13 +2,12 @@
   <h2 class="remd_tl">最新音乐</h2>
   <div class="remd_newsg">
     <div class="m-sglst">
-      <RouterLink class="m-sgitem" v-for="item in data" :to="`/play?id=${item?.song?.id}`">
+      <RouterLink class="m-sgitem" v-for="item in data" :to="`/play?id=${item?.song?.id || item?.id}`">
         <div class="sgfr f-bd f-bd-btm">
           <div class="sgchfl">
-            <div class="f-thide sgtl">{{ item.name }}</div>
+            <div class="f-thide sgtl">{{ item?.name }}</div>
             <div class="f-thide sginfo">
-              <i class="u-hmsprt sghot"></i>{{ item?.song?.album?.artists?.[0]?.name }} -
-              {{ item.song.name }}
+              <i class="u-hmsprt sghot"></i>{{ getAuthor(item) }}
             </div>
           </div>
           <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
@@ -20,16 +19,46 @@
 
 <script setup lang="ts">
 import request from '@/utils/request'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted , onUpdated } from 'vue'
 import { RouterLink } from 'vue-router';
-const data = ref<any>([])
+
+const data = ref([])
+function getAuthor(item){
+  let author = item?.song?.album?.artists?.[0]?.name;
+  let alias = item?.song?.alias?.[0];
+  if(!author){
+    author = item?.album?.artists?.[0]?.name;
+    alias = item?.alias?.[0];
+  }
+  if(author && alias){
+    return author + ' - ' + alias;
+  }else if(author){
+    return author;
+  }else if(alias){
+    return alias;
+  }
+  
+}
+
 onMounted(() => {
-  request('/newsong', {
+  if(data.value && data.value.length === 0){
+    request('/top/song', {
+    method: 'GET'
+  }).then((res: any) => {
+    data.value = res.data
+    console.log('/top/song:', res)
+  })
+  }
+})
+onUpdated(() => {
+  if(data.value && data.value.length === 0){
+    request('/newsong', {
     method: 'POST'
   }).then((res: any) => {
     data.value = res.result
-    // console.log('request:', res)
+    // console.log('/newsong:', res)
   })
+  }
 })
 </script>
 
