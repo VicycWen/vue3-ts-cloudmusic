@@ -73,6 +73,7 @@ import { useApiAvailable } from "@/stores/apiAvailable"
 const data = ref([])
 const apiAvailable = useApiAvailable()
 onMounted(() => {
+  // if(1) return;
   request('/personalized?limit=6', { method: 'GET' }).then((res: any) => {
     // console.log('personalized:', res)
     if (res?.code == 200 && res?.result?.length) {

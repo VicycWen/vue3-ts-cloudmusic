@@ -10,6 +10,7 @@ export default defineConfig({
   build: {
     outDir: 'docs'
   },
+  publicPath: './',
   plugins: [
     vue(),
     Components({
