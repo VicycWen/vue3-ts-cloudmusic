@@ -44,10 +44,10 @@ const fetchData = (url:string, defaultUrl:string, defaultMock = true) => {
         description = res?.playlist?.description?.split('\n');
         // console.log('request:', res?.playlist?.coverImgUrl)
         if((res.code !== 200 || !res?.playlist?.tracks?.length) && defaultMock){
-            fetchData(defaultUrl, '', false)
+            defaultUrl && fetchData(defaultUrl, '', false)
         }
     }).catch(() => {
-      fetchData(defaultUrl, '', false)
+        defaultUrl && fetchData(defaultUrl, '', false)
     })
 }
 onMounted(() => {

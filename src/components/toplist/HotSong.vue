@@ -27,11 +27,11 @@ const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {
       date.value = formaDate(res?.playlist?.updateTime)
       // console.log('request:', res?.playlist?.coverImgUrl)
       if ((res.code !== 200 || !res?.playlist?.tracks?.length) && defaultMock) {
-        fetchData(defaultUrl, '', false)
+        defaultUrl && fetchData(defaultUrl, '', false)
       }
     })
     .catch(() => {
-      fetchData(defaultUrl, '', false)
+      defaultUrl && fetchData(defaultUrl, '', false)
     })
 }
 onMounted(() => {

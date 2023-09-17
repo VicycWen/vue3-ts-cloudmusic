@@ -40,27 +40,23 @@ function getAuthor(item){
   
 }
 
-onMounted(() => {
-  if(data.value && data.value.length === 0){
-    request('/top/song', {
+const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {
+  request(url, {
     method: 'GET'
-  }).then((res: any) => {
-    data.value = res.data
-    // console.log('/top/song:', res)
   })
-  }
-})
-let firstGetNewsong = true
-onUpdated(() => {
-  if(data.value && data.value.length === 0 && firstGetNewsong){
-    firstGetNewsong = false
-    request('/newsong', {
-    method: 'POST'
-  }).then((res: any) => {
-    data.value = res.result
-    // console.log('/newsong:', res)
-  })
-  }
+    .then((res: any) => {
+      data.value = res.data || res.result
+      if ((res.code !== 200 || !res?.data?.length) && defaultMock) {
+        defaultUrl && fetchData(defaultUrl, '', false)
+      }
+    })
+    .catch(() => {
+      defaultUrl && fetchData(defaultUrl, '', false)
+    })
+}
+onMounted(() => {
+  fetchData('/top/song', '/newsong')
+  // fetchData('/newsong','',false)
 })
 </script>
 
