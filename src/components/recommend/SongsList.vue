@@ -2,17 +2,17 @@
   <h2 class="remd_tl">编辑推荐</h2>
   <div class="remd_songs">
     <div class="remd_ul">
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=3136952023">
+      <RouterLink class="remd_li" to="/list?id=7692044224">
         <div class="remd_img">
           <img
             class="u-img"
-            src="http://p2.music.126.net/eJiuM9Y5Z7ZgYYgbTkLKoA==/109951168815646715.jpg?imageView=1&amp;thumbnail=80x0"
+            src="https://p1.music.126.net/4WfHQQTaKu7pPtPrx3_g3g==/109951168722344005.jpg?imageView=1&type=webp&thumbnail=253x0"
           />
-          <span class="u-earp remd_lnum">167.1亿</span>
+          <span class="u-earp remd_lnum">171.6万</span>
         </div>
-        <p class="remd_text">今天从《致你》听起|私人雷达</p>
-      </a>
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=7360197193">
+        <p class="remd_text">全网超燃的英文歌曲BGM</p>
+      </RouterLink>
+      <RouterLink class="remd_li" to="/list?id=7360197193">
         <div class="remd_img">
           <img
             class="u-img"
@@ -21,8 +21,8 @@
           <span class="u-earp remd_lnum">119.4万</span>
         </div>
         <p class="remd_text">华语 | 我试着把孤独藏进耳机 用回忆代替</p>
-      </a>
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=7723266718">
+      </RouterLink>
+      <RouterLink class="remd_li" to="/list?id=7723266718">
         <div class="remd_img">
           <img
             class="u-img"
@@ -31,8 +31,8 @@
           <span class="u-earp remd_lnum">93.2万</span>
         </div>
         <p class="remd_text">2023年网易云热搜最好听的歌曲(持续持续)</p>
-      </a>
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=6804726357">
+      </RouterLink>
+      <RouterLink class="remd_li" to="/list?id=6804726357">
         <div class="remd_img">
           <img
             class="u-img"
@@ -41,8 +41,8 @@
           <span class="u-earp remd_lnum">221.9万</span>
         </div>
         <p class="remd_text">开心到爆炸的歌曲</p>
-      </a>
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=2829883282">
+      </RouterLink>
+      <RouterLink class="remd_li" to="/list?id=2829883282">
         <div class="remd_img">
           <img
             class="u-img"
@@ -50,9 +50,9 @@
           />
           <span class="u-earp remd_lnum">17.7亿</span>
         </div>
-        <p class="remd_text">毛不易的歌,总令人心动|华语私人雷达</p>
-      </a>
-      <a class="remd_li" href="//y.music.163.com/m/playlist?id=6893864535">
+        <p class="remd_text">李行亮的歌,总令人心动|华语私人雷达</p>
+      </RouterLink>
+      <RouterLink class="remd_li" to="/list?id=6893864535">
         <div class="remd_img">
           <img
             class="u-img"
@@ -61,12 +61,14 @@
           <span class="u-earp remd_lnum">229.5万</span>
         </div>
         <p class="remd_text">中文R &amp;B/.喜欢慵懒的感觉</p>
-      </a>
+      </RouterLink>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink } from 'vue-router';
+</script>
 
 <style lang="scss">
 .m-homeremd .remd_tl {

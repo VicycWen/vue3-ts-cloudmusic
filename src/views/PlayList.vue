@@ -2,7 +2,7 @@
     <div>
         <section class="official_pylst_header">
             <div class="ofplheader_bg" :style="
-          `background-image: url(${data?.playlist?.backgroundCoverUrl + '?param=170y170'})`
+          `background-image: url(${data?.playlist?.coverImgUrl + '?param=170y170'})`
         "></div>
             <div class="ofplheader_mask"></div>
             <div class="ofplheader_wrap">
@@ -28,16 +28,20 @@
 import SongList from '@/components/common/SongList.vue'
 import request from '@/utils/request'
 import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router';
+const { query } = useRoute()
+// console.log('query:', query)
+const id = query.id
 
 const data = ref<any>([]);
 let description = []
 onMounted(() => {
-    request('/playlist/detail?id=3136952023', {
+    request(`/playlist/detail?id=${id}`, {
         method: 'POST'
     }).then((res: any) => {
         data.value = res
         description = res?.playlist?.description?.split('\n');
-        // console.log('request:', res.playlist.tracks)
+        // console.log('request:', res?.playlist?.coverImgUrl)
     })
 })
 </script>
