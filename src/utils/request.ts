@@ -17,7 +17,7 @@ interface fetchOptions {
 
 export default function request(url: string, options: fetchOptions) {
     return new Promise((resolve, reject) => {
-        const { timeout = 10, retryTimes = 2, ...rest } = options
+        const { timeout = 5000, retryTimes = 2, ...rest } = options
         // console.log("重试次数：",retryTimes);
         
         const controller = new AbortController();
