@@ -2,7 +2,7 @@
   <h2 class="remd_tl">最新音乐</h2>
   <div class="remd_newsg">
     <div class="m-sglst">
-      <a class="m-sgitem" v-for="item in data" :href="`//music.163.com/m/song?id=${item?.song?.id}`">
+      <RouterLink class="m-sgitem" v-for="item in data" :to="`/play?id=${item?.song?.id}`">
         <div class="sgfr f-bd f-bd-btm">
           <div class="sgchfl">
             <div class="f-thide sgtl">{{ item.name }}</div>
@@ -13,7 +13,7 @@
           </div>
           <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
         </div>
-      </a>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import request from '@/utils/request'
 import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router';
 const data = ref<any>([])
 onMounted(() => {
   request('/newsong', {

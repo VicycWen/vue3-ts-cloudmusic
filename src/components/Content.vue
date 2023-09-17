@@ -30,7 +30,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      active: 1
+      active: 0
     }
   }
 })

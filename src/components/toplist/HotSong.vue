@@ -8,7 +8,7 @@
         </div>
         <div class="hotcont">
             <div class="m-sglst">
-                <a class="m-sgitem" v-for="(item, idx) in data" :key="item.id" :href="`//music.163.com/m/song?id=${item.id}`">
+                    <RouterLink class="m-sgitem" v-for="(item, idx) in data" :key="item.id" :to="`/play?id=${item.id}`">
                     <div class="sgfl sgfl-cred">{{ idx < 9 ? '0' + (idx + 1) : idx + 1 }}</div>
                     <div class="sgfr f-bd f-bd-btm">
                         <div class="sgchfl">
@@ -17,7 +17,7 @@
                         </div>
                         <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
                     </div>
-                </a>
+                </RouterLink>
             </div>
         </div>
     </div>
@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import request from '@/utils/request'
 import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 const data = ref<any>([])
 onMounted(() => {
   request('/playlist/detail', {
