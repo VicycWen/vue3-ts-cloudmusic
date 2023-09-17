@@ -4,7 +4,7 @@
       <van-tab title="推荐音乐"
         >
         <div class="m-homeremd">
-          <Playlist></Playlist>
+          <SongsList></SongsList>
           <Songs></Songs>
         </div>
       </van-tab>
@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Tab, Tabs } from 'vant'
 import { defineComponent } from 'vue'
-import Playlist from '@/components/recommend/Playlist.vue'
+import SongsList from '@/components/recommend/SongsList.vue'
 import Songs from '@/components/recommend/Songs.vue'
 import HotSong from '@/components/toplist/HotSong.vue'
 
@@ -25,7 +25,7 @@ export default defineComponent({
   components: {
     [Tab.name]: Tab,
     [Tabs.name]: Tabs,
-    Playlist: Playlist,
+    Playlist: SongsList,
     Songs: Songs
   },
   setup() {

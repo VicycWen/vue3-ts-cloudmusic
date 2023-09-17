@@ -13,7 +13,9 @@ declare module 'vue' {
     Playlist: typeof import('./src/components/recommend/Playlist.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SongList: typeof import('./src/components/common/SongList.vue')['default']
     Songs: typeof import('./src/components/recommend/Songs.vue')['default']
+    SongsList: typeof import('./src/components/recommend/SongsList.vue')['default']
     VanTab: typeof import('vant/es')['Tab']
     VanTabs: typeof import('vant/es')['Tabs']
   }
