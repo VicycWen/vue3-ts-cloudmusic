@@ -10,7 +10,6 @@ declare module 'vue' {
     Content: typeof import('./src/components/Content.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     HotSong: typeof import('./src/components/toplist/HotSong.vue')['default']
-    Playlist: typeof import('./src/components/recommend/Playlist.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SongList: typeof import('./src/components/common/SongList.vue')['default']
