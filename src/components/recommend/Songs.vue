@@ -2,13 +2,15 @@
   <h2 class="remd_tl">最新音乐</h2>
   <div class="remd_newsg">
     <div class="m-sglst">
-      <RouterLink class="m-sgitem" v-for="item in data" :to="`/play?id=${item?.song?.id || item?.id}`">
+      <RouterLink
+        class="m-sgitem"
+        v-for="item in data"
+        :to="`/play?id=${item?.song?.id || item?.id}`"
+      >
         <div class="sgfr f-bd f-bd-btm">
           <div class="sgchfl">
             <div class="f-thide sgtl">{{ item?.name }}</div>
-            <div class="f-thide sginfo">
-              <i class="u-hmsprt sghot"></i>{{ getAuthor(item) }}
-            </div>
+            <div class="f-thide sginfo"><i class="u-hmsprt sghot"></i>{{ getAuthor(item) }}</div>
           </div>
           <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
         </div>
@@ -19,25 +21,54 @@
 
 <script setup lang="ts">
 import request from '@/utils/request'
-import { ref, onMounted , onUpdated } from 'vue'
-import { RouterLink } from 'vue-router';
+import { ref, onMounted, onUpdated } from 'vue'
+import { RouterLink } from 'vue-router'
 
-const data = ref([])
-function getAuthor(item){
-  let author = item?.song?.album?.artists?.[0]?.name;
-  let alias = item?.song?.alias?.[0];
-  if(!author){
-    author = item?.album?.artists?.[0]?.name;
-    alias = item?.alias?.[0];
+interface IArtists {
+  id: number
+  name: string
+  picUrl: string
+}
+interface IAlbum {
+  id: number
+  name: string
+  picUrl: string
+  artists: IArtists[]
+}
+
+interface ISong {
+  id: number
+  name: string
+  picUrl: string
+  alias: string[]
+  artists: IArtists[]
+  album?: IAlbum
+}
+
+interface INewSongItem {
+  id: number
+  name: string
+  picUrl: string
+  song?: ISong
+  album?: IAlbum
+  alias?: string[]
+}
+
+const data = ref<INewSongItem[]>([])
+function getAuthor(item: INewSongItem) {
+  let author = item?.song?.album?.artists?.[0]?.name
+  let alias = item?.song?.alias?.[0]
+  if (!author) {
+    author = item?.album?.artists?.[0]?.name
+    alias = item?.alias?.[0]
   }
-  if(author && alias){
-    return author + ' - ' + alias;
-  }else if(author){
-    return author;
-  }else if(alias){
-    return alias;
+  if (author && alias) {
+    return author + ' - ' + alias
+  } else if (author) {
+    return author
+  } else if (alias) {
+    return alias
   }
-  
 }
 
 const fetchData = (url: string, defaultUrl: string, defaultMock = true) => {

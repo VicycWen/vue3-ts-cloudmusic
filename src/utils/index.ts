@@ -8,11 +8,11 @@ export function formatPlayCount(num: number) {
   }
   return idx === -1 ? num : newNum.toString().slice(0, 4) + units[idx]
 }
-function pad(timeEl, total = 2, str = '0') {
+function pad(timeEl: number | string, total = 2, str = '0') {
   return timeEl.toString().padStart(total, str)
 }
 
-export function formaDate(ts, options = { type: 'MM-DD', locale: 'zh-CN' }) {
+export function formaDate(ts: number, options = { type: 'MM-DD', locale: 'zh-CN' }) {
   if (!ts) return ''
   const { type, locale } = options
   const timer = new Date(ts)

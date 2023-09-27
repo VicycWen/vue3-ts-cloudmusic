@@ -1,49 +1,47 @@
 <template>
-    <div class="hotcont">
-      <div class="m-sglst">
-        <RouterLink
-          class="m-sgitem"
-          :class="{'m-sgitem-gray': isGray}"
-          v-for="(item, idx) in data"
-          :key="item.id"
-          :to="`/play?id=${item.id}`"
-        >
-          <div class="sgfl sgfl-cred" v-if="!isGray">{{ idx < 9 ? '0' + (idx + 1) : idx + 1 }}</div>
-          <div class="sgfl sgfl-cred" v-else>{{ idx+1 }}</div>
-          <div class="sgfr f-bd f-bd-btm">
-            <div class="sgchfl">
-              <div class="f-thide sgtl">{{ item.name }}</div>
-              <div class="f-thide sginfo">
-                <i class="u-hmsprt sghot" v-if="!isGray"></i>{{ item?.ar?.[0]?.name }} - {{ item?.al?.name }}
-              </div>
+  <div class="hotcont">
+    <div class="m-sglst">
+      <RouterLink
+        class="m-sgitem"
+        :class="{ 'm-sgitem-gray': isGray }"
+        v-for="(item, idx) in data"
+        :key="item.id"
+        :to="`/play?id=${item.id}`"
+      >
+        <div class="sgfl sgfl-cred" v-if="!isGray">{{ idx < 9 ? '0' + (idx + 1) : idx + 1 }}</div>
+        <div class="sgfl sgfl-cred" v-else>{{ idx + 1 }}</div>
+        <div class="sgfr f-bd f-bd-btm">
+          <div class="sgchfl">
+            <div class="f-thide sgtl">{{ item.name }}</div>
+            <div class="f-thide sginfo">
+              <i class="u-hmsprt sghot" v-if="!isGray"></i>{{ item?.ar?.[0]?.name }} -
+              {{ item?.al?.name }}
             </div>
-            <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
           </div>
-        </RouterLink>
-      </div>
+          <div class="sgchfr"><span class="u-hmsprt sgchply"></span></div>
+        </div>
+      </RouterLink>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { defineProps } from 'vue'
-import type { type } from 'os';
+import type { PropType } from 'vue'
+
+type SongList = { id: string; name: string; ar: { name: string }[]; al: { name: string } }[]
 defineProps({
-  data: {
-    type: Array,
-    default: () => [],
-  },
+  data: Array as PropType<SongList>,
   isGray: {
     type: Boolean,
     required: false,
-    default: false,
+    default: false
   }
 })
-
 </script>
 
 <style scoped>
-
 .m-sglst {
   position: relative;
 }
@@ -70,7 +68,7 @@ defineProps({
   color: #df3436;
 }
 .m-sgitem-gray:nth-child(-n + 3) .sgfl-cred {
-    color: #999;
+  color: #999;
 }
 
 .m-sgitem,
@@ -105,10 +103,10 @@ defineProps({
   flex: 1 1 auto;
 }
 .m-sgitem-gray .sgchfl {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .m-sgitem-gray .sgchfr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .m-sgitem .sgtl {
   font-size: 17px;

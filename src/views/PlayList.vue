@@ -35,7 +35,7 @@ const { query } = useRoute()
 const id = query.id
 
 const data = ref<any>([]);
-let description = []
+let description: string[] = []
 const fetchData = (url:string, defaultUrl:string, defaultMock = true) => {
     request(url, {
         method: 'POST'

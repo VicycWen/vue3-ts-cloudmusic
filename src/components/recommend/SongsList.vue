@@ -71,7 +71,15 @@ import request from '@/utils/request'
 import { formatPlayCount } from '@/utils/index'
 import { useApiAvailable } from "@/stores/apiAvailable"
 
-const data = ref([])
+interface IRecommendItem {
+  id:string,
+  picUrl:string,
+  playCount:number,
+  name:string
+}
+type RecommendList = IRecommendItem[]
+
+const data = ref<RecommendList>([])
 const apiAvailable = useApiAvailable()
 const isLoading = ref(true)
 onMounted(() => {
